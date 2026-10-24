@@ -18,80 +18,70 @@ from lab4 import (
     count_words,
     count_sentences,
     word_frequency,
-    # Додайте сюди інші функції, які хочете протестувати
+    extract_variant_data
 )
 
 class TestTextAnalyzer(unittest.TestCase):
 
     def test_find_substring(self):
         """Тест для функції find_substring."""
-        # TODO: Напишіть свій тест
-        # self.assertEqual(find_substring("Hello, world!", "world"), 7)
-        pass
+        self.assertEqual(find_substring("Hello, world!", "world"), 7)
+        self.assertEqual(find_substring("Hello, world!", "Python"), -1)
 
     def test_replace_substring(self):
         """Тест для функції replace_substring."""
-        # TODO: Напишіть свій тест
-        # self.assertEqual(replace_substring("Hello, world!", "world", "Python"), "Hello, Python!")
-        pass
+        self.assertEqual(replace_substring("Hello, world!", "world", "Python"), "Hello, Python!")
 
     def test_split_text(self):
         """Тест для функції split_text."""
-        # TODO: Напишіть свій тест
-        # self.assertEqual(split_text("Hello, world!", ", "), ["Hello", "world!"])
-        pass
+        self.assertEqual(split_text("Hello, world!", ", "), ["Hello", "world!"])
 
     def test_format_string_f(self):
         """Тест для функції format_string_f."""
-        # TODO: Напишіть свій тест
-        # self.assertEqual(format_string_f("Alice", 30), "Мене звати Alice і мені 30 років.")
-        pass
+        self.assertEqual(format_string_f("Alice", 30), "Мене звати Alice і мені 30 років.")
 
     def test_format_string_method(self):
         """Тест для функції format_string_method."""
-        # TODO: Напишіть свій тест
-        # self.assertEqual(format_string_method("Bob", 25), "Мене звати Bob і мені 25 років.")
-        pass
+        self.assertEqual(format_string_method("Bob", 25), "Мене звати Bob і мені 25 років.")
 
     def test_extract_emails(self):
         """Тест для функції extract_emails."""
         text = "Contact us at info@example.com or support@test.com"
         expected = ["info@example.com", "support@test.com"]
-        # TODO: Напишіть свій тест
-        # self.assertEqual(extract_emails(text), expected)
-        pass
+        self.assertEqual(extract_emails(text), expected)
 
     def test_validate_phone_number(self):
         """Тест для функції validate_phone_number."""
-        # TODO: Напишіть свої тести для валідних і невалідних номерів
-        # self.assertTrue(validate_phone_number("+380123456789"))
-        # self.assertFalse(validate_phone_number("12345"))
-        pass
+        self.assertTrue(validate_phone_number("+380123456789"))
+        self.assertFalse(validate_phone_number("12345"))
 
     def test_extract_hashtags(self):
         """Тест для функції extract_hashtags."""
         text = "I love #Python and #Programming"
         expected = ["#Python", "#Programming"]
-        # TODO: Напишіть свій тест
-        # self.assertEqual(extract_hashtags(text), expected)
-        pass
+        self.assertEqual(extract_hashtags(text), expected)
 
     def test_extract_mentions(self):
         """Тест для функції extract_mentions."""
-        # TODO: Напишіть свій тест
-        pass
+        text = "Hello @user1 and @admin"
+        expected = ["@user1", "@admin"]
+        self.assertEqual(extract_mentions(text), expected)
 
     def test_count_words(self):
         """Тест для функції count_words."""
-        # TODO: Напишіть свій тест
-        pass
+        text = "Один два три."
+        self.assertEqual(count_words(text), 3)
 
     def test_count_sentences(self):
         """Тест для функції count_sentences."""
-        # TODO: Напишіть свій тест
-        pass
+        text = "Привіт! Як справи? Все добре."
+        self.assertEqual(count_sentences(text), 3)
 
-    # === Додайте власні тести для інших функцій та варіантів ===
+    def test_extract_variant_data(self):
+        """Тест для вилучення даних за 4 варіантом."""
+        text = "Реактор FR-1000 працює стабільно."
+        pattern = r'\b[A-Z]{2}-\d+\b'
+        self.assertEqual(extract_variant_data(text, pattern), ["FR-1000"])
 
 
 if __name__ == '__main__':
